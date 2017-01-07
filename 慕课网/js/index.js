@@ -8,14 +8,16 @@ $(function(){
 	var speed = 600;
 	
 	//动画移上事件
-	$("#model-item .top").hover(function(){
-		$(this).animate({
-			top:"50px"
-		},600)
-	},function(){
-		$(this).animate({
-			top:"90px"
-		},600)
+	$("#model-item .top").each(function(){
+		$(this).hover(function(){
+			$(this).stop(true, false).animate({
+				top:"40px"
+			},600);
+		},function(){
+			$(this).animate({
+				top:"90px"
+			},600)
+		})
 	});
 	
 	//右侧侧边栏导航
