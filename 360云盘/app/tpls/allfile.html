@@ -1,0 +1,36 @@
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="file in files">
+  	<div class="row">
+  		<div class="col-md-7">
+  			<input ng-show="{{showcontent}}" type="checkbox" ng-model="file.state" ng-checked="selected" />
+  			<span class="{{file.icon}}"></span>
+  			<span>{{file.name}}</span>
+  		</div>
+  		<div ng-show="{{showcontent}}" class="col-md-5">
+  			<div class="btn-group" role="group" aria-label="...">
+				<button type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-download"></span>
+				</button>
+				<button type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-share-alt"></span>
+				</button>
+				<button ng-click="removeme($index)" type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+				 <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="glyphicon glyphicon-list"></span>
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">重命名</a></li>
+				      <li><a href="#">移动</a></li>
+				      <li><a href="#">放入保险箱</a></li>
+				    </ul>
+				  </div>
+			</div>
+  		</div>
+  	</div>
+  </li>
+</ul>
+

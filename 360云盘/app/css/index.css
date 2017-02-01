@@ -1,0 +1,7 @@
+body{
+	padding-top: 80px;
+}
+.navbar-brand .len{display:inline-block;width: 40px;}
+.list-group-item .glyphicon{padding: 0 20px;}
+.Fixed{position: fixed;}
+.row .main-top{margin-top: 20px;}
