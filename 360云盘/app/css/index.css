@@ -2,6 +2,11 @@ body{
 	padding-top: 80px;
 	overflow-x: hidden;
 }
+@media  screen and (max-width: 1000px) {
+	body{
+		padding-top: 50px;
+	}
+}
 .navbar-brand .len{display:inline-block;width: 40px;}
 .list-group-item .glyphicon{padding: 0 20px;}
 .Fixed{position:relative;}
