@@ -1,16 +1,22 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" ui-sref="index"><span class="len">&nbsp;</span>360云盘</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><a class="navbar-brand" ui-sref="index"><span class="len">&nbsp;</span>360云盘</a></a>
     </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   	<ul class="nav navbar-nav">
 	    <li class="active"><a ui-sref="index.skydrive">网盘 <span class="sr-only">(current)</span></a></li>
 	    <li><a ui-sref="index.skyclt">分享</a></li>
 	    <li><a ui-sref="index.skybis">企业云盘</a></li>
 	    <li><a ui-sref="index.skymore">更多</a></li>
-    
- 	</ul>
+ 		</ul>
   	<ul class="nav navbar-nav navbar-right">
 	    <li><a ui-sref="index.skyhistory">会员记录</a></li>
 	    <li><a ui-sref="index.skyclient">下载客户端</a></li>
@@ -25,5 +31,6 @@
 	      </ul>
 	    </li>
   	</ul>
+  </div>
   </div>
 </nav>

@@ -1,7 +1,38 @@
 body{
 	padding-top: 80px;
+	overflow-x: hidden;
 }
 .navbar-brand .len{display:inline-block;width: 40px;}
 .list-group-item .glyphicon{padding: 0 20px;}
-.Fixed{position: fixed;}
+.Fixed{position:relative;}
 .row .main-top{margin-top: 20px;}
+.flows{max-height: 450px; overflow:auto;padding-right:5px;}
+.flows .btn{border:none;padding: 6px 3px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar{
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-thumb{
+	background-color: rgba(0,0,0,.3);
+	border-radius: 6px;
+}
+::-webkit-scrollbar-track{
+	background-color: rgba(0,0,0,.1);
+	border-radius: 6px;
+}

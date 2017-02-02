@@ -1,5 +1,6 @@
 //var skyDriveApp = angular.module('skyDrive', []);
 
+//返回后台数据
 skyDriveApp.service('skyDrivefiles',
 	function($http){
 		this.getfiles = function(data){
@@ -10,9 +11,5 @@ skyDriveApp.service('skyDrivefiles',
 	   };
 	}
 );
-skyDriveApp.service("skyDrives",function(){
-	this.add = function(){
-		return {"name":"d"};
-		
-	}
-});
+
+
