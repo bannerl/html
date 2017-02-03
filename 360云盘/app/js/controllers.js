@@ -1,6 +1,6 @@
 skyDriveApp.controller('uproot', 
     function($scope,$rootScope) {
-        $rootScope.rootvalue = "";
+        $rootScope.xshide = true;
         $scope.$on("deletechecked",function(e){
 	    	$scope.$broadcast("deletecheckeds");
 	    });

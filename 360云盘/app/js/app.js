@@ -42,7 +42,28 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 	}).state("index.allfile",{
 		url:"/allfile",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,skyDrivefiles){
+		controller:function($scope,$rootScope,$interval,skyDrivefiles){
+			
+//			$window.resize(function(){ 
+//			    var Height = $window.height();
+//			    var Width = $window.width();
+//			    console.log(Height);
+//			})
+		$interval(function(){
+			$scope.width();
+		},600);
+		$scope.width = function(){
+			if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+			{
+			winHeight = document.documentElement.clientHeight;
+			winWidth = document.documentElement.clientWidth;
+			}
+			if(winWidth<600){
+				 $rootScope.xshide = false;
+			}else{
+				 $rootScope.xshide = true;
+			}
+		};
 			//接受兄弟节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组

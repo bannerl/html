@@ -1,32 +1,34 @@
 <ul class="list-group flows">
   <li class="list-group-item" ng-repeat="file in files">
   	<div class="row">
-  		<div class="col-md-7 col-xs-5">
+  		<div class="col-md-7 col-xs-8">
   			<input ng-show="{{showcontent}}" type="checkbox" ng-model="file.state" ng-checked="selected" />
   			<span class="{{file.icon}}"></span>
   			<span>{{file.name}}</span>
   		</div>
-  		<div ng-show="{{showcontent}}" class="col-md-4 col-xs-7 pull-right">
+  		<div ng-show="{{showcontent}}" class="col-md-4 pull-right">
   			<div class="btn-group" role="group" aria-label="...">
-				<button type="button" class="btn btn-default">
-					<span class="glyphicon glyphicon-download"></span>
-				</button>
-				<button type="button" class="btn btn-default">
-					<span class="glyphicon glyphicon-share-alt"></span>
-				</button>
-				<button ng-click="removeme($index)" type="button" class="btn btn-default">
-					<span class="glyphicon glyphicon-remove"></span>
-				</button>
-				 <div class="btn-group" role="group">
-				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="glyphicon glyphicon-plus-sign"></span>
-				      <span class="caret"></span>
-				    </button>
-				    <ul class="dropdown-menu">
-				      <li><a href="#">重命名</a></li>
-				      <li><a href="#">移动</a></li>
-				      <li><a href="#">放入保险箱</a></li>
-				    </ul>
+					<button type="button" ng-show="xshide" class="btn btn-default">
+						<span class="glyphicon glyphicon-download"></span>
+					</button>
+					<button type="button" ng-show="xshide" class="btn btn-default">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</button>
+					<button ng-show="xshide" ng-click="removeme($index)" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+					 <div class="btn-group" role="group">
+					    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-plus-sign"></span>
+					      <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu">
+					      <li ng-hide="xshide"><a href="#">分享</a></li>
+					      <li ng-hide="xshide"><a href="#">删除</a></li>
+					      <li><a href="#">重命名</a></li>
+					      <li><a href="#">移动</a></li>
+					      <li><a href="#">放入保险箱</a></li>
+					    </ul>
 				  </div>
 			</div>
   		</div>
