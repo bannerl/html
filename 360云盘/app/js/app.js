@@ -17,6 +17,62 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			"main@index":{
 				templateUrl:"tpls/main.html",
 				controller:function($scope,$rootScope){
+					$scope.asides = [
+						{
+							"url":"index.allfile",
+							"state":"",
+							"icon":"glyphicon-folder-open",
+							"title":"所有文件"
+						},
+						{
+							"url":"index.movie",
+							"state":"",
+							"icon":"glyphicon-film",
+							"title":"视频"
+						},
+						{
+							"url":"index.picture",
+							"state":"",
+							"icon":"glyphicon-picture",
+							"title":"图片"
+						},
+						{
+							"url":"index.music",
+							"state":"",
+							"icon":"glyphicon-headphones",
+							"title":"音乐"
+						},
+						{
+							"url":"index.alt",
+							"state":"",
+							"icon":"glyphicon-list-alt",
+							"title":"文档"
+						},
+						{
+							"url":"index.share",
+							"state":"",
+							"icon":"glyphicon-share",
+							"title":"我的分享"
+						},
+						{
+							"url":"index.heart",
+							"state":"",
+							"icon":"glyphicon-heart",
+							"title":"保险箱"
+						},
+						{
+							"url":"index.reseve",
+							"state":"",
+							"icon":"glyphicon-envelope",
+							"title":"收件箱"
+						},
+						{
+							"url":"index.junk",
+							"state":"",
+							"icon":"glyphicon-trash",
+							"title":"回收站"
+						}
+					];
 					
 					//全选功能实现
 					$scope.selected = false;
@@ -26,9 +82,13 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 						$scope.$emit("datatran");
 					};
 					
-					//把所有全选关闭
+					//把所有全选关闭，控制active
 					$scope.newadd = function(){
 						$scope.selected = false;
+						angular.forEach($scope.asides,function(aside){
+							aside.state = "";
+						});
+						this.aside.state = "active";
 					}
 					
 					//删除选中的选项
@@ -43,12 +103,7 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 		url:"/allfile",
 		templateUrl:"tpls/allfile.html",
 		controller:function($scope,$rootScope,$interval,skyDrivefiles){
-			
-//			$window.resize(function(){ 
-//			    var Height = $window.height();
-//			    var Width = $window.width();
-//			    console.log(Height);
-//			})
+
 		$interval(function(){
 			$scope.width();
 		},600);
