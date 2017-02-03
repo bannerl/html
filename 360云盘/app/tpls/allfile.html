@@ -1,12 +1,12 @@
 <ul class="list-group flows">
   <li class="list-group-item" ng-repeat="file in files">
   	<div class="row">
-  		<div class="col-md-7">
+  		<div class="col-md-7 col-xs-5">
   			<input ng-show="{{showcontent}}" type="checkbox" ng-model="file.state" ng-checked="selected" />
   			<span class="{{file.icon}}"></span>
   			<span>{{file.name}}</span>
   		</div>
-  		<div ng-show="{{showcontent}}" class="col-md-4  pull-right">
+  		<div ng-show="{{showcontent}}" class="col-md-4 col-xs-7 pull-right">
   			<div class="btn-group" role="group" aria-label="...">
 				<button type="button" class="btn btn-default">
 					<span class="glyphicon glyphicon-download"></span>

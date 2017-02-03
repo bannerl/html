@@ -36,11 +36,6 @@
 					<a ng-click="newadd()" ui-sref="index.junk" class="list-group-item"><span class="glyphicon glyphicon-trash"></span>回收站</a>
 				</div>
 			</div>
-		    
-
-
-
-
 		</div>
 	</div>
 	<div class="col-md-10">
@@ -48,18 +43,24 @@
 			<form>
 				<div class="col-md-8">
 					<div class="btn-toolbar" role="toolbar" aria-label="...">
-					  	<div class="btn-group" role="group" aria-label="...">
-							<a class="btn btn-primary"><span class="glyphicon glyphicon-upload">&nbsp;</span>上传</a>
-					  	</div>
-					 	<div class="btn-group" role="group" aria-label="...">
-							<a class="btn btn-default"><span class="glyphicon glyphicon-plus-sign">&nbsp;</span>新建文件夹</a>	
-					 	</div>
-					 	<div class="btn-group" role="group" aria-label="...">
-							<a ng-click="allselect()" class="btn btn-default"><span class="glyphicon glyphicon-check">&nbsp;</span>全选</a>	
-					 	</div>
-					 	<div class="btn-group" role="group" aria-label="...">
-							<a ng-click="deletes()" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>删除</a>	
-					 	</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="btn-group" role="group" aria-label="...">
+									<a class="btn btn-primary"><span class="glyphicon glyphicon-upload">&nbsp;</span>上传</a>
+							  	</div>
+							 	<div class="btn-group" role="group" aria-label="...">
+									<a class="btn btn-default"><span class="glyphicon glyphicon-plus-sign">&nbsp;</span>新建文件夹</a>	
+							 	</div>
+							</div>
+							<div class="col-md-6">
+								<div class="btn-group" role="group" aria-label="...">
+									<a ng-click="allselect()" class="btn btn-default"><span class="glyphicon glyphicon-check">&nbsp;</span>全选</a>	
+							 	</div>
+							 	<div class="btn-group" role="group" aria-label="...">
+									<a ng-click="deletes()" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>删除</a>	
+							 	</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-3">
