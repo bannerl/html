@@ -3,9 +3,9 @@
 		<div class="list-group  position">
 			<div class="row">
 				<div class="col-md-12" ng-repeat="aside in asides">
-					<a ng-click="newadd($event)" ui-sref="{{aside.url}}" class="list-group-item {{aside.state}}">
+					<a ng-click="newadd()" ui-sref="{{aside.url}}" class="list-group-item {{aside.state}}">
 				    	<span class="glyphicon {{aside.icon}}"></span>
-							   {{aside.title}}
+						{{aside.title}}
 				  	</a>
 				</div>
 			</div>
@@ -16,18 +16,9 @@
 			<form>
 				<div class="col-md-8">
 					<div class="btn-toolbar" role="toolbar" aria-label="...">
-						<div class="btn-group" role="group" aria-label="...">
-							<a class="btn btn-primary"><span class="glyphicon glyphicon-upload">&nbsp;</span>上传</a>
+						<div class="btn-group" ng-repeat="opera in operas" role="group">
+							<a ng-click="allfunc($index)" class="btn {{opera.state}}"><span class="glyphicon {{opera.icon}}">&nbsp;</span>{{opera.title}}</a>
 					  	</div>
-					 	<div class="btn-group" role="group" aria-label="...">
-							<a class="btn btn-default"><span class="glyphicon glyphicon-plus-sign">&nbsp;</span>新建文件夹</a>	
-					 	</div>
-						<div class="btn-group" role="group" aria-label="...">
-							<a ng-click="allselect()" class="btn btn-default"><span class="glyphicon glyphicon-check">&nbsp;</span>全选</a>	
-					 	</div>
-					 	<div class="btn-group" role="group" aria-label="...">
-							<a ng-click="deletes()" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>删除</a>	
-					 	</div>
 					</div>
 				</div>
 				<div class="col-md-3">

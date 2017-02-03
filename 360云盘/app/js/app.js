@@ -16,64 +16,56 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			},
 			"main@index":{
 				templateUrl:"tpls/main.html",
-				controller:function($scope,$rootScope){
-					$scope.asides = [
+				controller:function($scope,$rootScope,$location,$state,skyDrivefiles){
+					$scope.operas = [
 						{
-							"url":"index.allfile",
-							"state":"",
-							"icon":"glyphicon-folder-open",
-							"title":"所有文件"
+							"state":"btn-default",
+							"icon":"glyphicon-upload",
+							"title":"上传",
+							"func":""
 						},
 						{
-							"url":"index.movie",
-							"state":"",
-							"icon":"glyphicon-film",
-							"title":"视频"
+							"state":"btn-default",
+							"icon":"glyphicon-plus-sign",
+							"title":"新建文件夹",
+							"func":""
 						},
 						{
-							"url":"index.picture",
-							"state":"",
-							"icon":"glyphicon-picture",
-							"title":"图片"
+							"state":"btn-default",
+							"icon":"glyphicon-check",
+							"title":"全选",
+							"func":""
 						},
 						{
-							"url":"index.music",
-							"state":"",
-							"icon":"glyphicon-headphones",
-							"title":"音乐"
-						},
-						{
-							"url":"index.alt",
-							"state":"",
-							"icon":"glyphicon-list-alt",
-							"title":"文档"
-						},
-						{
-							"url":"index.share",
-							"state":"",
-							"icon":"glyphicon-share",
-							"title":"我的分享"
-						},
-						{
-							"url":"index.heart",
-							"state":"",
-							"icon":"glyphicon-heart",
-							"title":"保险箱"
-						},
-						{
-							"url":"index.reseve",
-							"state":"",
-							"icon":"glyphicon-envelope",
-							"title":"收件箱"
-						},
-						{
-							"url":"index.junk",
-							"state":"",
-							"icon":"glyphicon-trash",
-							"title":"回收站"
+							"state":"btn-default",
+							"icon":"glyphicon-remove-circle",
+							"title":"删除",
+							"func":""
 						}
 					];
+					skyDrivefiles.getfiles("js/asides.json").success(function(data){
+						$scope.asides = data;
+					});
 					
+					//执行operas函数,执行新建文件删除全选等功能
+					$scope.allfunc = function(i){
+						if(i=="2"){
+							$scope.allselect();
+						}else if(i=="3"){
+							$scope.deletes();
+						}else if(i=="1"){
+							$scope.newfile();
+						}
+						//active切换
+						angular.forEach($scope.operas,function(opera){
+							opera.state = "btn-default";
+						});
+						this.opera.state = "btn-primary";
+					};
+					$scope.newfile = function(){
+						$scope.$emit("newaddfiles");
+					};
+
 					//全选功能实现
 					$scope.selected = false;
 					$scope.allselect = function(){
@@ -89,12 +81,19 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 							aside.state = "";
 						});
 						this.aside.state = "active";
-					}
-					
+					};
+					$scope.$on("mainactives",function(e){
+						angular.forEach($scope.asides,function(aside){
+							if($state.current.name == aside.url){
+								aside.state = "active";
+							}
+						});
+					});
+
 					//删除选中的选项
 					$scope.deletes = function(){
 						$scope.$emit("deletechecked");
-					}
+					};
 				}
 			}
 			
@@ -102,24 +101,43 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 	}).state("index.allfile",{
 		url:"/allfile",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,$interval,skyDrivefiles){
-
-		$interval(function(){
-			$scope.width();
-		},600);
-		$scope.width = function(){
-			if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
-			{
-			winHeight = document.documentElement.clientHeight;
-			winWidth = document.documentElement.clientWidth;
+		controller:function($scope,$rootScope,$state,$interval,$window,skyDrivefiles){
+			//获取client尺寸，对样式操作,将选项右侧四个功能键删除
+			$interval(function(){
+				$scope.width();
+			},600);
+			$scope.width = function(){
+				if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+				{
+				winHeight = document.documentElement.clientHeight;
+				winWidth = document.documentElement.clientWidth;
+				}
+				if(winWidth<600){
+					 $rootScope.xshide = false;
+				}else{
+					 $rootScope.xshide = true;
+				}
+			};
+			//打开文件夹
+			$scope.addnewpage = function(i){
+				if(i=="0"){
+					$state.go("index.nocontent");
+				}
 			}
-			if(winWidth<600){
-				 $rootScope.xshide = false;
-			}else{
-				 $rootScope.xshide = true;
-			}
-		};
-			//接受兄弟节点的删除选中命令
+			//接收父亲的新建文件夹命令
+			$scope.$on("addnewfile",function(e){
+				name = $window.prompt("请输入文件名");
+				  
+				obj = {};
+				if(name!=""&&name!="null"){
+					obj.name = name;
+					obj.type = "0";
+					obj.icon = "glyphicon glyphicon-folder-open";
+					obj.state = false;
+					$scope.files.unshift(obj);
+				}
+			});
+			//接受父亲节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组
 				var num = [];
@@ -142,18 +160,23 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 				angular.forEach(data,function(_data){
 					if(_data.type == '0'){
 						_data.icon = 'glyphicon glyphicon-folder-open';
+						_data.func = "0";
 					}else if(_data.type =='1'){
+						_data.func = "1";
 						_data.icon = "glyphicon glyphicon-music";
 					}else if(_data.type == '2'){
+						_data.func = "1";
 						_data.icon = "glyphicon glyphicon-picture";
 					}else if(_data.type == '3'){
+						_data.func = "1";
 						_data.icon = "glyphicon glyphicon-list-alt";
 					}
 				});
 				//是否显示
 				$scope.showcontent = true;
 				$scope.files = data;
-				
+				//记录历史记录的main 的active
+				$scope.$emit("mainactive");
 				//接收事件，修改files中的state,以便可以删除选中
 				$scope.$on("datatrans",function(e){
 					for(var i=0;i<$scope.files.length;i++){
@@ -169,7 +192,7 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 	}).state("index.movie",{
 		url:"/movie",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,$state,skyDrivefiles){
+		controller:function($scope,$rootScope,$window,$state,skyDrivefiles){
 			//接受兄弟节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组
@@ -182,6 +205,18 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 				$rootScope.sortbiglittle(num);
 				for(var i =0;i<num.length;i++){
 	        		$scope.files.splice(num[i],1);
+				}
+			});
+			//接收父亲的新建文件夹命令
+			$scope.$on("addnewfile",function(e){
+				name = $window.prompt("请输入文件名");
+				obj = {};
+				if(name!=""&&name!="null"){
+					obj.name = name;
+					obj.type = "0";
+					obj.icon = "glyphicon glyphicon-folder-open";
+					obj.state = false;
+					$scope.files.unshift(obj);
 				}
 			});
 			//接收事件，修改files中的state,以便可以删除选中
@@ -206,20 +241,22 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 						$scope.boo = false;
 					}
 				});
+				//记录历史记录的main 的active
+				$scope.$emit("mainactive");
 				if($scope.boo){
 					$scope.showcontent = true;
 					$scope.files = data;
 				}else{
 					$scope.showcontent = false;
-					$state.go("index.nocontent");
-					//$scope.files = [{"name":"暂无"}];
+					//$state.go("index.nocontent");
+					$scope.files = [{"name":"暂无"}];
 				}
 			});
 		}
 	}).state("index.picture",{
 		url:"/img",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,skyDrivefiles){
+		controller:function($scope,$rootScope,$window,skyDrivefiles){
 			//接受兄弟节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组
@@ -232,6 +269,19 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 				$rootScope.sortbiglittle(num);
 				for(var i =0;i<num.length;i++){
 	        		$scope.files.splice(num[i],1);
+				}
+			});
+			//接收父亲的新建文件夹命令
+			$scope.$on("addnewfile",function(e){
+				name = $window.prompt("请输入文件名");
+				  
+				obj = {};
+				if(name!=""&&name!="null"){
+					obj.name = name;
+					obj.type = "0";
+					obj.icon = "glyphicon glyphicon-folder-open";
+					obj.state = false;
+					$scope.files.unshift(obj);
 				}
 			});
 			//接收事件，修改files中的state,以便可以删除选中
@@ -270,12 +320,14 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 					$scope.showcontent = false;
 					$scope.files = [{"name":"暂无"}];
 				}
+				//记录历史记录的main 的active
+				$scope.$emit("mainactive");
 			});
 		}
 	}).state("index.music",{
 		url:"/music",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,skyDrivefiles){
+		controller:function($scope,$rootScope,$window,skyDrivefiles){
 			//接受兄弟节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组
@@ -288,6 +340,19 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 				$rootScope.sortbiglittle(num);
 				for(var i =0;i<num.length;i++){
 	        		$scope.files.splice(num[i],1);
+				}
+			});
+			//接收父亲的新建文件夹命令
+			$scope.$on("addnewfile",function(e){
+				name = $window.prompt("请输入文件名");
+				  
+				obj = {};
+				if(name!=""&&name!="null"){
+					obj.name = name;
+					obj.type = "0";
+					obj.icon = "glyphicon glyphicon-folder-open";
+					obj.state = false;
+					$scope.files.unshift(obj);
 				}
 			});
 			//接收事件，修改files中的state,以便可以删除选中
@@ -327,12 +392,14 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 					$scope.showcontent = false;
 					$scope.files = [{"name":"暂无"}];
 				}
+				//记录历史记录的main 的active
+				$scope.$emit("mainactive");
 			});
 		}
 	}).state("index.alt",{
 		url:"/alt",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,skyDrivefiles){
+		controller:function($scope,$rootScope,$window,skyDrivefiles){
 			//接受兄弟节点的删除选中命令
 			$scope.$on("deletecheckeds",function(e){
 				//将需要删除的序号放入数组
@@ -345,6 +412,19 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 				$rootScope.sortbiglittle(num);
 				for(var i =0;i<num.length;i++){
 	        		$scope.files.splice(num[i],1);
+				}
+			});
+			//接收父亲的新建文件夹命令
+			$scope.$on("addnewfile",function(e){
+				name = $window.prompt("请输入文件名");
+				  
+				obj = {};
+				if(name!=""&&name!="null"){
+					obj.name = name;
+					obj.type = "0";
+					obj.icon = "glyphicon glyphicon-folder-open";
+					obj.state = false;
+					$scope.files.unshift(obj);
 				}
 			});
 			//接收事件，修改files中的state,以便可以删除选中
@@ -384,6 +464,8 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 					$scope.showcontent = false;
 					$scope.files = [{"name":"暂无"}];
 				}
+				//记录历史记录的main 的active
+				$scope.$emit("mainactive");
 			});
 		}
 	}).state("index.nocontent",{
@@ -410,5 +492,23 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 	}).state("index.junk",{
 		url:"/junk",
 		templateUrl:"tpls/junk.html"
+	}).state("index.skyclt",{
+		url:"/skyclt",
+		views:{
+			"main@index":{
+				templateUrl:"tpls/sharemain.html"
+			}
+		}
+	}).state("index.skyclt.content",{
+		url:"/content",
+		templateUrl:"tpls/clt.html"
+
+	}).state("index.skybis",{
+		url:"/skybis",
+		views:{
+			"main@index":{
+				templateUrl:"tpls/bismain.html"
+			}
+		}
 	});
 });

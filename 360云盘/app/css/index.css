@@ -13,9 +13,9 @@ body{
 .row .main-top{margin-top: 20px;}
 .flows{max-height: 450px; overflow:auto;padding-right:5px;}
 .flows .btn{border:none;padding: 6px 3px;}
-
-
-
+.form-horizontal .form-group .error{color: #FF0000;}
+.page-header{text-align: center;}
+.mybtn{line-height: 30px;text-align: center;background: #;width: 100%;display: block;}
 
 
 
