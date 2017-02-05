@@ -16,108 +16,18 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			},
 			"main@index":{
 				templateUrl:"tpls/main.html",
-				controller:function($scope,$rootScope,$location,$state,skyDrivefiles){
-					$scope.operas = [
-						{
-							"state":"btn-default",
-							"icon":"glyphicon-upload",
-							"title":"上传",
-							"func":""
-						},
-						{
-							"state":"btn-default",
-							"icon":"glyphicon-plus-sign",
-							"title":"新建文件夹",
-							"func":""
-						},
-						{
-							"state":"btn-default",
-							"icon":"glyphicon-check",
-							"title":"全选",
-							"func":""
-						},
-						{
-							"state":"btn-default",
-							"icon":"glyphicon-remove-circle",
-							"title":"删除",
-							"func":""
-						}
-					];
-					skyDrivefiles.getfiles("js/asides.json").success(function(data){
-						$scope.asides = data;
-					});
-					
-					//执行operas函数,执行新建文件删除全选等功能
-					$scope.allfunc = function(i){
-						if(i=="2"){
-							$scope.allselect();
-						}else if(i=="3"){
-							$scope.deletes();
-						}else if(i=="1"){
-							$scope.newfile();
-						}
-						//active切换
-						angular.forEach($scope.operas,function(opera){
-							opera.state = "btn-default";
-						});
-						this.opera.state = "btn-primary";
-					};
-					$scope.newfile = function(){
-						$scope.$emit("newaddfiles");
-					};
-
-					//全选功能实现
-					$scope.selected = false;
-					$scope.allselect = function(){
-						$scope.selected = !$scope.selected;
-						//传播事件修改files的state值
-						$scope.$emit("datatran");
-					};
-					
-					//把所有全选关闭，控制active
-					$scope.newadd = function(){
-						$scope.selected = false;
-						angular.forEach($scope.asides,function(aside){
-							aside.state = "";
-						});
-						this.aside.state = "active";
-					};
-					$scope.$on("mainactives",function(e){
-						angular.forEach($scope.asides,function(aside){
-							if($state.current.name == aside.url){
-								aside.state = "active";
-							}
-						});
-					});
-
-					//删除选中的选项
-					$scope.deletes = function(){
-						$scope.$emit("deletechecked");
-					};
-				}
+				controller:"loaddata"
 			}
 			
 		}
 	}).state("index.allfile",{
 		url:"/allfile",
 		templateUrl:"tpls/allfile.html",
-		controller:function($scope,$rootScope,$state,$interval,$window,skyDrivefiles){
+		controller:function($scope,$rootScope,$state,$interval,$window,skyDrivefiles,edaptive){
 			//获取client尺寸，对样式操作,将选项右侧四个功能键删除
 			$interval(function(){
-				$scope.width();
+				edaptive.client();
 			},600);
-			$scope.width = function(){
-				if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
-				{
-				winHeight = document.documentElement.clientHeight;
-				winWidth = document.documentElement.clientWidth;
-				}
-				if(winWidth<600){
-					 $rootScope.xshide = false;
-				}else{
-					 $rootScope.xshide = true;
-				}
-			};
 			//打开文件夹
 			$scope.addnewpage = function(i){
 				if(i=="0"){
@@ -127,7 +37,6 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			//接收父亲的新建文件夹命令
 			$scope.$on("addnewfile",function(e){
 				name = $window.prompt("请输入文件名");
-				  
 				obj = {};
 				if(name!=""&&name!="null"){
 					obj.name = name;
@@ -274,7 +183,6 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			//接收父亲的新建文件夹命令
 			$scope.$on("addnewfile",function(e){
 				name = $window.prompt("请输入文件名");
-				  
 				obj = {};
 				if(name!=""&&name!="null"){
 					obj.name = name;
@@ -345,7 +253,6 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			//接收父亲的新建文件夹命令
 			$scope.$on("addnewfile",function(e){
 				name = $window.prompt("请输入文件名");
-				  
 				obj = {};
 				if(name!=""&&name!="null"){
 					obj.name = name;
@@ -417,7 +324,6 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 			//接收父亲的新建文件夹命令
 			$scope.$on("addnewfile",function(e){
 				name = $window.prompt("请输入文件名");
-				  
 				obj = {};
 				if(name!=""&&name!="null"){
 					obj.name = name;
@@ -507,7 +413,18 @@ skyDriveApp.config(function($stateProvider,$urlRouterProvider) {
 		url:"/skybis",
 		views:{
 			"main@index":{
-				templateUrl:"tpls/bismain.html"
+				templateUrl:"tpls/bismain.html",
+				controller:function($scope){
+				}
+			}
+		}
+	}).state("index.skymore",{
+		url:"/skymore",
+		views:{
+			"main@index":{
+				templateUrl:"tpls/moremain.html",
+				controller:function($scope){
+				}
 			}
 		}
 	});
