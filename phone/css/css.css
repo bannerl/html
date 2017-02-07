@@ -1,0 +1,62 @@
+@charset "UTF-8";
+body {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+html{height: 100%;width: 100%;}
+#highpage{
+			position: relative;
+			width: 400%;
+			height: 100%;
+			display: -webkit-box;
+			pointer-events: none;
+			-webkit-transform: translate3d(0,0,0);
+			backface-visibility: hidden;
+			overflow: hidden;
+			transition: all .3s ease-in;
+		}
+*{
+	padding: 0;
+	margin: 0;
+}
+.first-page{
+	position: relative;
+	float: left;
+	width: 25%;
+	height: 100%;
+	background: #11B7F3;
+}
+
+.header {
+  font-size: 16px;
+  font-family: "微软雅黑";
+  width: 100%;
+  color: #fff;
+  line-height: 50px;
+  text-indent: 1em;
+}
+.header-fixed{
+	position: absolute;
+	top: 0;
+}
+.footer{
+	bottom: 0;
+	font-size: 14px;
+	text-align: center;
+  font-family: "微软雅黑";
+  width: 100%;
+  color: #fff;
+  line-height: 40px;
+  background: #999999;
+}
+.footer-fixed{
+	position: absolute;
+	bottom: 0;
+}
+.floatl{float: left;}
+.floatr{float: right;}
+.first-page .header{
+	background: #111;
+	font-size: 20px;
+}
