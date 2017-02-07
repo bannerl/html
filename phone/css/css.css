@@ -52,7 +52,7 @@ html{height: 100%;width: 100%;}
 	width: 200%;
 	height: 1px;
 	border-top: 1px solid #ddd;
-	/*-webkit-transform: scale(0.5);*/
+	-webkit-transform: scale(0.5);
 	/*border-top: 1px solid #ddd;*/
 } 
 .header-fixed span{
