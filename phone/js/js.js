@@ -72,7 +72,7 @@ var nes = 0;
 document.addEventListener("touchend",function(e){
 	 var lens;
 	/*判断移动距离是否满足*/ 
-	if(Math.abs(deltaX)>currentwidth/2){
+	if(Math.abs(deltaX)>currentwidth/4){
 		for(var i = 0;i<uppage.length;i++){
 			var _nes = Math.abs(nes);
 			var j = i+1;

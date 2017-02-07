@@ -1,11 +1,22 @@
 body {
-  background: #fff;
+  background: #ddd;
   font-family: "microsoft yahei";
   width: 100%;
   height: 100%;
 }
 li{list-style: none;}
 html{height: 100%;width: 100%;}
+@font-face {
+  font-family: 'iconfont';  /* project id 228489 */
+  src: url('//at.alicdn.com/t/font_11ia6byuq6vcmcxr.eot');
+  src: url('//at.alicdn.com/t/font_11ia6byuq6vcmcxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_11ia6byuq6vcmcxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_11ia6byuq6vcmcxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_11ia6byuq6vcmcxr.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family: "iconfont";
+}
 #highpage{
     position: relative;
     width: 400%;
@@ -52,7 +63,7 @@ html{height: 100%;width: 100%;}
     left: -50%;
     width: 200%;
     height: 1px;
-    border-top: 1px solid #999;
+    border-top: 1px solid #ddd;
     -webkit-transform: scale(0.5);
 } 
 .header-fixed span{
@@ -119,18 +130,20 @@ html{height: 100%;width: 100%;}
 }
 
 .middle-body{
-    padding: 5px 15px;
+    padding: 0px 15px;
     span{
         margin-right: 20px;
     }
     li{
-        line-height: 40px;
+        line-height: 35px;
+        padding: 5px 0;
     }
     li.line{
         position: relative;
         left: -50%;
         height: 1px;
         width: 200%;
+        padding: 0;
         border-top: 1px solid #ddd;
         -webkit-transform: scale(.5);
     }
@@ -138,8 +151,32 @@ html{height: 100%;width: 100%;}
 /*第三页*/
 .body-sort{
     position: relative;
-    margin-top: -25px;
+    margin-top: -20px;
     line-height: 20px;
+    background: #f5f5f5;
+}
+/*第二页*/
+.two-index{
+    .middle{
+        padding-top:0 ;
+    }
+}
+.two-icon{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    background: #FF7F24;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+    font-size: 24px;
+}
+.more-icon{
+    background: #32CD32;
+}
+.label-icon{
+    background: #4682B4;
 }
 /*第一页*/
 .first-index{
