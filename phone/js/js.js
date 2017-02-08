@@ -112,12 +112,12 @@ document.addEventListener("touchmove",function(e){
 	}
 });
 var nes = 0;
- var lens;
 document.addEventListener("touchend",function(e){
 	//判断是否有点击事件
 //	if(e.path.length == "9"||e.path.length == "10"){
 //		return false;
 //	}
+var lens;
 	/*判断移动距离是否满足*/ 
 	if(Math.abs(deltaX)>currentwidth/4){
 		for(var i = 0;i<uppage.length;i++){
