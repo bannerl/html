@@ -95,7 +95,6 @@ document.addEventListener("touchstart",function(e){
 var deltaX;
 document.addEventListener("touchmove",function(e){
 	e.preventDefault();
-	
 	var touch = e.touches[0];
 	 deltaX = touch.pageX - startX;
 	 deltaY = touch.pageY - startY;
@@ -117,7 +116,7 @@ document.addEventListener("touchend",function(e){
 //	if(e.path.length == "9"||e.path.length == "10"){
 //		return false;
 //	}
-var lens;
+	var lens;
 	/*判断移动距离是否满足*/ 
 	if(Math.abs(deltaX)>currentwidth/4){
 		for(var i = 0;i<uppage.length;i++){
@@ -138,15 +137,15 @@ var lens;
 				break;
 			}
 		}
+	console.log(currentwidth);
+		
 	}else{
 		lens = nes;
 	}
-	var _lens = Math.abs(lens)/375;
-	
-	console.log(_lens);
-	pageChange(_lens);
+	var _len = Math.abs(lens)/currentwidth;
 	highpage.style.webkitTransform = "translate3d("+lens+"px,0,0)";
 	nes = highpage.style.webkitTransform.slice("12").split("px")[0];	
+	pageChange(_len);
 });
 
 function getStyle(ele) {
