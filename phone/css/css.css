@@ -6,6 +6,23 @@ body {
   height: 100%;
 }
 
+.icon {
+  /* 通过设置 font-size 来改变图标大小 */
+  width: 1.2em;
+  height: 1.2em;
+  /* 图标和文字相邻时，垂直对齐 */
+  vertical-align: -0.2em;
+  /* 通过设置 color 来改变 SVG 的颜色/fill */
+  fill: currentColor;
+  /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
+     normalize.css 中也包含这行 */
+  overflow: hidden;
+}
+
+.first-page svg {
+  margin-right: 20px;
+}
+
 li {
   list-style: none;
 }
@@ -18,8 +35,8 @@ html {
 @font-face {
   font-family: 'iconfont';
   /* project id 228489 */
-  src: url("//at.alicdn.com/t/font_11ia6byuq6vcmcxr.eot");
-  src: url("//at.alicdn.com/t/font_11ia6byuq6vcmcxr.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_11ia6byuq6vcmcxr.woff") format("woff"), url("//at.alicdn.com/t/font_11ia6byuq6vcmcxr.ttf") format("truetype"), url("//at.alicdn.com/t/font_11ia6byuq6vcmcxr.svg#iconfont") format("svg");
+  src: url("//at.alicdn.com/t/font_ppxbn6mmstf0f6r.eot");
+  src: url("//at.alicdn.com/t/font_ppxbn6mmstf0f6r.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_ppxbn6mmstf0f6r.woff") format("woff"), url("//at.alicdn.com/t/font_ppxbn6mmstf0f6r.ttf") format("truetype"), url("//at.alicdn.com/t/font_ppxbn6mmstf0f6r.svg#iconfont") format("svg");
 }
 .iconfont {
   font-family: "iconfont";
@@ -34,7 +51,7 @@ html {
   -webkit-transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   overflow: hidden;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 * {
@@ -58,7 +75,7 @@ html {
 
 .footer-fixed {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   bottom: 0;
   font-size: 14px;
@@ -83,6 +100,11 @@ html {
   padding: 0 10px;
 }
 
+.header-fixed .icon {
+  padding: 0 10px 0 0;
+  font-size: 1.3em;
+}
+
 .header-fixed .little {
   font-size: 14px;
   padding: 0 6px;
@@ -98,7 +120,16 @@ html {
   width: 25%;
   background: #fff;
   color: #666;
-  line-height: 40px;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.footer-fixed ul .icon {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  line-height: 30px;
+  font-size: 15px;
 }
 
 /*页面区域*/

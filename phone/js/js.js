@@ -2,14 +2,35 @@ var highpage = document.getElementById("highpage");
 var uppage = document.getElementsByClassName("first-page");
 var currentwidth = parseInt(getStyle(uppage[0]).width);
 var userInfo = document.getElementsByClassName("user-info")[0];
-
-//创建标签
-function newele(){
-	
+var footerCtrl = document.getElementsByClassName("footer-ctrl");
+//footer控制
+var boo = false;
+for(var n = 0;n<footerCtrl.length;n++){
+	footerCtrl[n].index = n;
+	footerCtrl[n].getElementsByClassName("icon")[1].style.display = "none";
+	footerCtrl[n].onclick = function(){
+		for(var ns = 0;ns<footerCtrl.length;ns++){
+			footerCtrl[ns].getElementsByClassName("icon")[1].style.display = "none";
+			footerCtrl[ns].getElementsByClassName("icon")[0].style.display = "inline-block";
+		}
+		//active切换
+		var _all = footerCtrl[this.index].getElementsByClassName("icon");
+		if(getStyle(_all[0]).display=="none"){
+			_all[0].style.display = "inline-block";
+			_all[1].style.display = "none";
+		}else{
+			_all[1].style.display = "inline-block";
+			_all[0].style.display = "none";
+		}	
+		var len = -(this.index*currentwidth);
+		boo = true;
+		highpage.style.webkitTransform = "translate3d("+len+"px,0,0)";
+	}
 }
+
 //后台数据请求
 function getInfo(){
-
+	//兼容ie6
 	if(window.XMLHttpRequest){
 		var xhr = new XMLHttpRequest();
 	}else{
@@ -38,11 +59,11 @@ function getInfo(){
 getInfo();
 //触摸事件
 document.addEventListener("touchstart",function(e){
-	e.preventDefault();
+	//e.preventDefault();
+	console.log(typeof e.path[1].onclick);
 	var touch = e.touches[0];
 	startX = touch.pageX;
 	startY = touch.pageY;
-//		initialPos = currentPosition;
 	highpage.style.webkitTransition = "";
 	startT = new Date().getTime();
 	isMove = false;
@@ -92,8 +113,15 @@ document.addEventListener("touchend",function(e){
 			}
 		}
 	}else{
-		lens = nes;
+		console.log(boo);
+		if(boo){
+			return false;
+		}else{
+			console.log(1);
+			lens = nes;
+		}
 	}	
+	console.log(21);
 	highpage.style.webkitTransform = "translate3d("+lens+"px,0,0)";
 	nes = highpage.style.webkitTransform.slice("12").split("px")[0];	
 });
