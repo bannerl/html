@@ -96,13 +96,22 @@ html {
   -webkit-transform: scale(0.5);
 }
 
-.header-fixed span {
+.header-fixed .navbar span {
   padding: 0 10px;
 }
 
 .header-fixed .icon {
   padding: 0 10px 0 0;
   font-size: 1.3em;
+}
+
+.header-fixed .line-bar {
+  height: 25px;
+  width: 100%;
+  line-height: 25px;
+}
+.header-fixed .line-bar span {
+  padding: 0 5px;
 }
 
 .header-fixed .little {
@@ -113,6 +122,9 @@ html {
 .footer-fixed ul {
   width: 100%;
 }
+.footer-fixed ul .active {
+  color: #1afa29;
+}
 
 .footer-fixed ul li {
   float: left;
@@ -121,7 +133,7 @@ html {
   background: #fff;
   color: #666;
   line-height: 20px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .footer-fixed ul .icon {
@@ -129,7 +141,7 @@ html {
   width: 100%;
   margin-top: 10px;
   line-height: 30px;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 /*页面区域*/
@@ -141,7 +153,7 @@ html {
   background: #ddd;
 }
 .first-page .middle {
-  margin: 51px 0 45px;
+  margin: 76px 0 45px;
   width: 100%;
   height: 100%;
   background: #f5f5f5;
