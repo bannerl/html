@@ -94,7 +94,7 @@ document.addEventListener("touchstart",function(e){
 }.bind(this),false);
 var deltaX;
 document.addEventListener("touchmove",function(e){
-	e.preventDefault();
+	//e.preventDefault(); 
 	var touch = e.touches[0];
 	 deltaX = touch.pageX - startX;
 	 deltaY = touch.pageY - startY;
@@ -107,20 +107,24 @@ document.addEventListener("touchmove",function(e){
 		}else if(len>=0){
 			len = 100;
 		}
+		console.log(deltaX);
 		highpage.style.webkitTransform = "translate3d("+len+"px,0,0)";
 	}
 });
 var nes = 0;
 document.addEventListener("touchend",function(e){
-	//判断是否有点击事件
-//	if(e.path.length == "9"||e.path.length == "10"){
-//		return false;
-//	}
+	var head = document.getElementsByClassName("box")[0];
+	//console.log(getStyle(head).left);
+	
 	var lens;
+	console.log(deltaX);
 	/*判断移动距离是否满足*/ 
+	console.log(Math.abs(deltaX));
+	console.log(currentwidth/4);
 	if(Math.abs(deltaX)>currentwidth/4){
 		for(var i = 0;i<uppage.length;i++){
 			var _nes = Math.abs(nes);
+			console.log(_nes);
 			var j = i+1;
 			if(_nes>=i*currentwidth&&_nes<j*currentwidth){
 				if (deltaX>0) {
@@ -133,15 +137,17 @@ document.addEventListener("touchend",function(e){
 						j = 3;
 					}
 					lens = -(j*currentwidth);
+					console.log(12);
 				}
 				break;
 			}
 		}
-	console.log(currentwidth);
-		
 	}else{
+					console.log(122);
+		
 		lens = nes;
 	}
+	console.log(lens);
 	var _len = Math.abs(lens)/currentwidth;
 	highpage.style.webkitTransform = "translate3d("+lens+"px,0,0)";
 	nes = highpage.style.webkitTransform.slice("12").split("px")[0];	
