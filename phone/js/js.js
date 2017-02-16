@@ -87,7 +87,6 @@ $(document).ready(function(){
 		 moveX = ts.pageX - startX;
 		 moveY = ts.pageY - startY;
 		 movesX = moveX;
-		console.log(moveX);
 		 
 		if(Math.abs(moveX)>Math.abs(moveY)){
 			highpagewidth = 1*highpagewidth;
@@ -105,8 +104,7 @@ $(document).ready(function(){
 	document.addEventListener("touchend",function(e){
 		var len;
 		//判断手指移动距离是否满足要求
-		if(Math.abs(movesX)>currentwidth/4){
-			console.log(1);
+		if(Math.abs(movesX)>currentwidth/7){
 			if(movesX>0){
 				len = 1*highpagewidth + currentwidth;
 				if(len>=0){
@@ -122,6 +120,8 @@ $(document).ready(function(){
 		$("#highpage").get(0).style.webkitTransform = "translate3d("+len+"px,0,0)";
 		//获取当前值
 		highpagewidth = $("#highpage").get(0).style.webkitTransform.slice("12").split("px")[0];
+		var index = Math.abs(highpagewidth/currentwidth);
+		pageChange(index);
 	});
 	
 	//获取样式
