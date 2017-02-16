@@ -1,11 +1,15 @@
 @charset "UTF-8";
-body {
-  background: #ddd;
+html,body{
+	background: #ddd;
   font-family: "microsoft yahei";
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    font-family: Arial;
 }
-
 .icon {
   /* 通过设置 font-size 来改变图标大小 */
   width: 1.2em;
