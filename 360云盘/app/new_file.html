@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <meta charset="utf-8" />
+  <style type="text/css">
+  	body{font: 16px/26px "微软雅黑";}
+  </style>
+<script src="framework/1.3.0.14/angular.js"></script>
+<div ng-controller="FatherCtrl">    //父元素
+  <p>{{name}}</p>
+  <div ng-controller="ChildCtrl1">    //子元素1
+    <p ng-click="change()">{{name}}</p>
+  </div>
+  <div ng-controller="ChildCtrl2">    //子元素2
+    <p >{{name}}</p>
+  </div>
+</div>
+<script>
+	var app = angular.module("myApp",[]);   
+	app.controller('FatherCtrl',function($scope) {
+      $scope.name = "father";
+      $scope.$on("child",function(e){
+        $scope.name = "接收子级child1传来的事件";
+        $scope.$broadcast("down");
+    });
+  });
+	app.controller('ChildCtrl1',function($scope) {
+    $scope.name = "child1";
+      $scope.change = function() {
+        $scope.name = "child1";
+     		$scope.$emit("child");
+    };
+	});
+  app.controller('ChildCtrl2',function($scope) {
+    	$scope.name = "child2";
+	    $scope.$on("down",function(e){
+	    	$scope.name = "接收父级father传来的事件";
+	    });
+	});
+</script>
