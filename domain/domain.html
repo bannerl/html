@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代理页面</title>
+		<style type="text/css">
+			#content{
+				padding: 20px;
+				border: 1px solid #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<h3>下面是postMeaage传递的内容：</h3>
+			<p id="content">默认内容！</p>
+		</div>
+		<script>
+			//window.name跨域
+			window.name = "这是domain页面的数据";
+			//postmessage跨域
+			window.onmessage = function(e){
+				e = e || event;
+				var content = document.getElementById('content');
+				content.innerHTML = e.data;
+			}
+		</script>
+	</body>
+</html>
